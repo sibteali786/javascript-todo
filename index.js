@@ -6,10 +6,25 @@ console.log(listContent);
 console.log(itemName);
 console.log(addButton);
 
+// Empty Array item
+var item = [];
 
+// getting localStorage data into localStorageItems
+const localStorageItems = localStorage.getItem("items");
 
+// condition to assign empty item array values if localStorage items is not already empty
+if (localStorageItems !== null) {
+  // has to do items
+  item = JSON.parse(localStorageItems);
+}
+console.log(localStorageItems);
 addButton.addEventListener("click", (e) => {
   const itemValue = itemName.value;
+  item.push(itemName.value);
+
+  const JSONItems = JSON.stringify(item);
+  localStorage.setItem("items", JSONItems);
+
   itemName.value = ""; // so that after we write and add something previous value disappears
   // List Item
   const liItem = document.createElement("li");
